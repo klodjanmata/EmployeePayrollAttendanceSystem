@@ -13,7 +13,7 @@ import lombok.*;
 public class Payroll {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long  Id;
+    private Long Id;
 
     @OneToOne
     private Employee employee_id;
