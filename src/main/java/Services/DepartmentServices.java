@@ -27,17 +27,7 @@ public class DepartmentServices {
         System.out.println("Department with id: " + department.getId() + " added successfully");
 
     }
-    public void printAll(){
-        System.out.println("The Departments List");
-        System.out.println("ID\tName\tLocation");
-        for (Department department : departmentsMap.values()){
-            System.out.println(
-                            department.getId() + "\t" +
-                            department.getName() + "\t"+
-                            department.getLocation() + "\t"
-            );
-        }
-    }
+
 }
 
 

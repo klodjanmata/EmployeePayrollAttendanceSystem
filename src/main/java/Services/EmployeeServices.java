@@ -2,7 +2,9 @@ package Services;
 
 import Entity.Employee;
 import Entity.OvertimeRate;
+import Repository.DepartmentRepository;
 import Util.Helper;
+import Util.Printer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,17 +19,20 @@ import java.util.HashMap;
 @Setter
 public class EmployeeServices {
     private HashMap<Long, Employee> employeeMap;
+    private DepartmentRepository departmentRepository;
 
     public void add(){
         System.out.println("Add the nessesary employee information : ");
         Employee employee = new Employee();
-        employee.setId(Helper.getLongFromUser("ID"));
         employee.setName(Helper.getStringFromUser("Name"));
         employee.setEmail(Helper.getStringFromUser("Email"));
         employee.setHireDate(Helper.getLocalDateFromUser("Hire Date"));
-        employee.setDepartmentId(Helper.getDepartment.DepartmentId("Department ID"));
+        Printer.printDepartments(departmentRepository.findAll());
+        employee.setDepartmentId(departmentRepository.find(Helper.getLongFromUser("Department ID")) == null ?
+                departmentRepository.find(1L) :
+                departmentRepository.find(Helper.getLongFromUser("Department ID")));
         employee.setBaseSalary(Helper.getLongFromUser("Base Salary"));
-       // employee.prin
+       // TODO print all overtime rates than chose id
         employee.setOvertimeRateId(OvertimeRate.valueOf(Helper.getLongFromUser("OvertimeRate")));
         System.out.println();
     }
@@ -36,20 +41,6 @@ public class EmployeeServices {
                 System.out.println(employee.toString()));
     }
 
-    public void printAll(){
-        System.out.println("***Full Employee List***");
-        System.out.println("ID\tName\tEmail\tHire Date\tBase Salary\tOvertimeRate");
-        for (Employee employee : employeeMap.values()){
-            System.out.println(
-                    employee.getId()
-                    + "\t" + employee.getName()
-                    + "\t" + employee.getEmail()
-                    + "\t" + employee.getHireDate()
-                    + "\t" + employee.getBaseSalary()
-                    + "\t" + employee.getDepartmentId()
-                    + "\t" + employee.getBaseSalary()
-                    + "\t" + employee.getOvertimeRateId());
-        }
-    }
+
 }
 
