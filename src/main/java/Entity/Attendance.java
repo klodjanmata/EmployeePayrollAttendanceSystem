@@ -18,13 +18,13 @@ public class Attendance {
     private Long id;
 
     @OneToOne
-    private Employee employee_id;
+    private Employee employeeId;
     @Column(name = "date")
     private LocalDate date;
     @Column(name = "status")
     private boolean status;
     @Column(name = "hours_worked")
-    private int hours_worked;
+    private int hoursWorked;
 
 
 }

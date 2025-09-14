@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class LeaveRequestRepo {
+public class LeaveRequestRepository {
 
     public LeaveRequest create(LeaveRequest leaveRequest){
         try(Session session = HibernateUtil.getSessionFactory().openSession()){

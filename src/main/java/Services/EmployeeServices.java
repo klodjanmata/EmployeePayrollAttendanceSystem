@@ -21,22 +21,27 @@ public class EmployeeServices {
     private HashMap<Long, Employee> employeeMap;
     private DepartmentRepository departmentRepository;
 
-    public void add(){
+    public void add() {
         System.out.println("Add the nessesary employee information : ");
         Employee employee = new Employee();
+        long id = Helper.getLongFromUser("DepartmentID");
+        if (departmentRepository.find(id) == null) {
+            System.out.println("Department does not exist");
+            return;
+
+        } else{
+            employee.setDepartmentId(departmentRepository.find(id));
+        }
         employee.setName(Helper.getStringFromUser("Name"));
         employee.setEmail(Helper.getStringFromUser("Email"));
         employee.setHireDate(Helper.getLocalDateFromUser("Hire Date"));
         Printer.printDepartments(departmentRepository.findAll());
-        employee.setDepartmentId(departmentRepository.find(Helper.getLongFromUser("Department ID")) == null ?
-                departmentRepository.find(1L) :
-                departmentRepository.find(Helper.getLongFromUser("Department ID")));
-        employee.setBaseSalary(Helper.getLongFromUser("Base Salary"));
+
+
        // TODO print all overtime rates than chose id
         employee.setOvertimeRateId(OvertimeRate.valueOf(Helper.getLongFromUser("OvertimeRate")));
-        System.out.println();
-    }
-   public void
+
+
 
 
 }

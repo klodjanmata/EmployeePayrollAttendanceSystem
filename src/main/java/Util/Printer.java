@@ -1,5 +1,6 @@
 package Util;
 
+import Entity.Attendance;
 import Entity.Department;
 import Entity.Employee;
 
@@ -34,5 +35,17 @@ public class Printer {
                             + "\t" + employee.getBaseSalary()
                             + "\t" + employee.getOvertimeRateId());
         }
+    }
+    public static void printAttendances(List< Attendance > attendances){
+        System.out.println("***Full Employee List***");
+        System.out.println("ID\tName\tEmail\tHire Date\tBase Salary\tOvertimeRate");
+        for (Attendance attendance : attendances){
+            System.out.println(
+                    attendance.getId()
+                            + "\t" + attendance.getEmployeeId()
+                            + "\t" + attendance.getDate()
+                            + "\t" + attendance.isStatus()
+                            + "\t" + attendance.getHoursWorked());
+            }
     }
 }
