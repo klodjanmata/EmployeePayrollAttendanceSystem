@@ -36,10 +36,7 @@ public class EmployeeServices {
         employee.setOvertimeRateId(OvertimeRate.valueOf(Helper.getLongFromUser("OvertimeRate")));
         System.out.println();
     }
-    public void printAllDepartmentIDs(){
-        employeeMap.values().forEach(employee ->
-                System.out.println(employee.toString()));
-    }
+   public void
 
 
 }
