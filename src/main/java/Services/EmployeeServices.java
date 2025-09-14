@@ -26,6 +26,7 @@ public class EmployeeServices {
     public void add() {
         System.out.println("Add the nessesary employee information : ");
         Employee employee = new Employee();
+        Printer.printDepartments(departmentRepository.findAll());
         long id = Helper.getLongFromUser("DepartmentID");
         if (departmentRepository.find(id) == null) {
             System.out.println("Department does not exist");
@@ -37,11 +38,18 @@ public class EmployeeServices {
         employee.setName(Helper.getStringFromUser("Name"));
         employee.setEmail(Helper.getStringFromUser("Email"));
         employee.setHireDate(Helper.getLocalDateFromUser("Hire Date"));
-        Printer.printDepartments(departmentRepository.findAll());
 
 
         Printer.printOvertimeRate(overtimeRateRepository.findAll());
-    }
+        long idOvertime = Helper.getLongFromUser("Overtime Rate Id");
+                if(overtimeRateRepository.find(idOvertime) == null){
+                    System.out.println("Overtime Rate does not exist");
+                    return;
+                }
+                else  {
+                    employee.setOvertimeRateId(overtimeRateRepository.find(idOvertime));
+                }
+         }
 
-}
+    }
 
