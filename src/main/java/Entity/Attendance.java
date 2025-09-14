@@ -3,6 +3,7 @@ package Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +20,7 @@ public class Attendance {
     @OneToOne
     private Employee employee_id;
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
     @Column(name = "status")
     private boolean status;
     @Column(name = "hours_worked")
