@@ -18,12 +18,12 @@ public class LeaveRequestServices {
         LeaveRequest leaveRequest = new LeaveRequest();
         Printer.printEmployees(employeeRepository.findAll());
         long id = Helper.getLongFromUser("Employee ID");
-        if (employeeRepository.read(id) == null){
+        if (employeeRepository.find(id) == null){
             System.out.println("Employee not found");
             return;
         }
         else {
-            leaveRequest.setEmployeeId(employeeRepository.read(id));
+            leaveRequest.setEmployeeId(employeeRepository.find(id));
         }
         leaveRequest.setStartDate(Helper.getLocalDateFromUser("Start Date :"));
         leaveRequest.setEndDate(Helper.getLocalDateFromUser("End Date :"));
@@ -32,4 +32,3 @@ public class LeaveRequestServices {
     }
 }
 
-}
