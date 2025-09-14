@@ -1,9 +1,6 @@
 package Util;
 
-import Entity.Attendance;
-import Entity.Department;
-import Entity.Employee;
-import Entity.LeaveRequest;
+import Entity.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -62,6 +59,18 @@ public class Printer {
                             + "\t" + leaveRequest.getEndDate()
                             + "\t" + leaveRequest.getReason()
                             + "\t" + leaveRequest.isStatus());
+        }
+    }
+
+    public static void printOvertimeRate(List<OvertimeRate> overtimeRates) {
+        System.out.println("Overtime Rates List");
+        System.out.println("ID\tDescription\tRate For Hours");
+        for (OvertimeRate overtimeRate : overtimeRates) {
+            System.out.println(
+                    overtimeRate.getId()
+                            + "\t" + overtimeRate.getDescription()
+                            + "\t" + overtimeRate.getRateForHour()
+            );
         }
     }
 }

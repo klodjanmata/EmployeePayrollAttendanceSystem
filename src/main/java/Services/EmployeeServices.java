@@ -3,6 +3,7 @@ package Services;
 import Entity.Employee;
 import Entity.OvertimeRate;
 import Repository.DepartmentRepository;
+import Repository.OvertimeRateRepository;
 import Util.Helper;
 import Util.Printer;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 public class EmployeeServices {
     private HashMap<Long, Employee> employeeMap;
     private DepartmentRepository departmentRepository;
+    private OvertimeRateRepository overtimeRateRepository;
 
     public void add() {
         System.out.println("Add the nessesary employee information : ");
@@ -29,7 +31,7 @@ public class EmployeeServices {
             System.out.println("Department does not exist");
             return;
 
-        } else{
+        } else {
             employee.setDepartmentId(departmentRepository.find(id));
         }
         employee.setName(Helper.getStringFromUser("Name"));
@@ -38,11 +40,8 @@ public class EmployeeServices {
         Printer.printDepartments(departmentRepository.findAll());
 
 
-       // TODO print all overtime rates than chose id
-        employee.setOvertimeRateId(OvertimeRate.valueOf(Helper.getLongFromUser("OvertimeRate")));
-
-
-
+        Printer.printOvertimeRate(overtimeRateRepository.findAll());
+    }
 
 }
 
