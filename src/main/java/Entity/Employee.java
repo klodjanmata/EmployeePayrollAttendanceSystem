@@ -25,13 +25,13 @@ public class Employee {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "hire_date")
+    @Column(name = "hireDate")
     private LocalDate hireDate;
 
     @OneToOne
     private Department departmentId;
 
-    @Column(name = "base_salary")
+    @Column(name = "baseSalary")
     private long baseSalary;
 
     @OneToOne

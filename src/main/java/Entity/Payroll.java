@@ -16,17 +16,17 @@ public class Payroll {
     private Long Id;
 
     @OneToOne
-    private Employee employee_id;
-    @Column(name = "month")
+    private Employee employeeId;
+    @Column(name = "Month")
     private String month;
-    @Column(name = "year")
+    @Column(name = "Year")
     private int year;
-    @Column(name= "base_salary")
-    private int base_salary;
-    @Column(name = "overtime_hours")
-    private int overtime_hours;
-    @Column(name = "total salary")
-    private int total_salary;
+    @Column(name= "Base salary")
+    private float baseSalary;
+    @Column(name = "OvertimeHours")
+    private int overtimeHours;
+    @Column(name = "Total Salary")
+    private float totalSalary;
 
 
 }

@@ -20,7 +20,6 @@ public class DepartmentServices {
     public void add() {
         System.out.println("Add the necessary department information");
         Department department = new Department();
-        department.setId(Helper.getLongFromUser("ID"));
         department.setName(Helper.getStringFromUser("Name of the Department"));
         department.setLocation(Helper.getStringFromUser("Location of your Department"));
         departmentsMap.put(department.getId(), department);

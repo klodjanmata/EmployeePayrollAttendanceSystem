@@ -21,10 +21,10 @@ public class LeaveRequest {
     @OneToOne
     private Employee employeeId;
 
-    @Column(name = "start_date")
+    @Column(name = "startDate")
     private LocalDate startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "endDate")
     private LocalDate endDate;
 
     @Column (name = "reason")
