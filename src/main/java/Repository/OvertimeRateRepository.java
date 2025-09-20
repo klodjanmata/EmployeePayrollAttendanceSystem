@@ -64,7 +64,7 @@ public class OvertimeRateRepository {
     }
     public HashMap<Long, OvertimeRate> findAllHibernate(){
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            return (HashMap<Long, OvertimeRate>) session.createQuery("FROM Client");
+            return (HashMap<Long, OvertimeRate>) session.createQuery("FROM OvertimeRate");
         } catch (Exception e) {
             e.printStackTrace();
             return null;

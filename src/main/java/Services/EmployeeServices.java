@@ -56,6 +56,22 @@ public class EmployeeServices {
                     employee.setOvertimeRateId(overtimeRateRepository.find(idOvertime));
                 }
          }
+         public void delete(){
+             System.out.println("Delete Employee");
+             Long employeeId = Helper.getLongFromUser("Enter employee id to delete");
+             if (employeeMap.containsKey(employeeId)){
+                 employeeMap.remove(employeeId);
+                 System.out.println("Employee with Id: " + employeeId + " is deleted");
 
+             }else{
+                 System.out.println("Employee not found!");
+             }
+
+         }
+         public void printAll(){
+        for(Employee employee : employeeMap.values()){
+            System.out.println(employee);
+        }
+         }
     }
 

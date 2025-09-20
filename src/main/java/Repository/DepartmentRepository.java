@@ -65,7 +65,7 @@ public class DepartmentRepository {
     }
     public HashMap<Long, Department> findAllHibernate(){
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            return (HashMap<Long, Department>) session.createQuery("FROM Client");
+            return (HashMap<Long, Department>) session.createQuery("FROM Department");
         } catch (Exception e) {
             e.printStackTrace();
             return null;

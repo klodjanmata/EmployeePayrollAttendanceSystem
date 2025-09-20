@@ -69,7 +69,7 @@ public class LeaveRequestRepository {
     }
     public HashMap<Long, LeaveRequest> findAllHibernate(){
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            return (HashMap<Long, LeaveRequest>) session.createQuery("FROM Client");
+            return (HashMap<Long, LeaveRequest>) session.createQuery("FROM LeaveRequest");
         } catch (Exception e) {
             e.printStackTrace();
             return null;

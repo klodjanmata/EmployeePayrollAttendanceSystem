@@ -66,7 +66,7 @@ public class AttendanceRepository {
     }
     public HashMap<Long, Attendance> findAllHibernate(){
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            return (HashMap<Long, Attendance>) session.createQuery("FROM Client");
+            return (HashMap<Long, Attendance>) session.createQuery("FROM Attendance");
         } catch (Exception e) {
             e.printStackTrace();
             return null;

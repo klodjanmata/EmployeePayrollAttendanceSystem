@@ -83,7 +83,7 @@ public class Application {
                 app.employeeServices.delete();
                 break;
                 case 3:
-                    app.
+                    app.employeeServices.printAll();
 
 
         }

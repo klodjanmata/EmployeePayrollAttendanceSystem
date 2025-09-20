@@ -66,7 +66,7 @@ public class PayrollRepository {
     }
     public HashMap<Long, Payroll> findAllHibernate(){
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            return (HashMap<Long, Payroll>) session.createQuery("FROM Client");
+            return (HashMap<Long, Payroll>) session.createQuery("FROM Payroll");
         } catch (Exception e) {
             e.printStackTrace();
             return null;
