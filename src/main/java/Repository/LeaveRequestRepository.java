@@ -5,6 +5,7 @@ import Util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class LeaveRequestRepository {
@@ -47,14 +48,14 @@ public class LeaveRequestRepository {
         }
         return leaveRequest;
     }
-    public List<LeaveRequest> findAll() {
+    public HashMap<Long, LeaveRequest> findAll() {
         Transaction transaction = null;
-        List<LeaveRequest> leaveRequests = null;
+        HashMap<Long, LeaveRequest> leaveRequests = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
             // HQL query to fetch all Actor records
-            leaveRequests = session.createQuery("Leave Request", LeaveRequest.class).list();
+            leaveRequests = (HashMap<Long, LeaveRequest>) session.createQuery("from LeaveRequest ", LeaveRequest.class).list();
 
             transaction.commit();
         } catch (Exception e) {

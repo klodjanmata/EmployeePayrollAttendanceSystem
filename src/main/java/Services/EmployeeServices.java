@@ -1,5 +1,6 @@
 package Services;
 
+import Entity.Department;
 import Entity.Employee;
 import Entity.OvertimeRate;
 import Repository.DepartmentRepository;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashMap;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -23,10 +25,14 @@ public class EmployeeServices {
     private DepartmentRepository departmentRepository;
     private OvertimeRateRepository overtimeRateRepository;
 
+    public EmployeeServices(HashMap<Long, Employee> employeeMap) {
+        this.employeeMap = employeeMap;
+    }
+
     public void add() {
         System.out.println("Add the nessesary employee information : ");
         Employee employee = new Employee();
-        Printer.printDepartments(departmentRepository.findAll());
+        Printer.printDepartments((List<Department>) departmentRepository.findAll());
         long id = Helper.getLongFromUser("DepartmentID");
         if (departmentRepository.find(id) == null) {
             System.out.println("Department does not exist");
@@ -40,7 +46,7 @@ public class EmployeeServices {
         employee.setHireDate(Helper.getLocalDateFromUser("Hire Date"));
 
 
-        Printer.printOvertimeRate(overtimeRateRepository.findAll());
+        Printer.printOvertimeRate((List<OvertimeRate>) overtimeRateRepository.findAll());
         long idOvertime = Helper.getLongFromUser("Overtime Rate Id");
                 if(overtimeRateRepository.find(idOvertime) == null){
                     System.out.println("Overtime Rate does not exist");

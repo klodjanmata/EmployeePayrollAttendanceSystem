@@ -5,6 +5,7 @@ import Util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class EmployeeRepository {
@@ -44,12 +45,12 @@ public void delete(Employee employee){
             e.printStackTrace();
         }
     }
-    public List<Employee> findAll(){
+    public HashMap<Long, Employee> findAll(){
         Transaction transaction = null;
-        List <Employee> employees = null;
+        HashMap <Long,Employee> employees = null;
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
-            employees = session.createQuery("from Employee", Employee.class).list();
+            employees = (HashMap<Long, Employee>) session.createQuery("from Employee", Employee.class).list();
             transaction.commit();
         } catch (Exception e){
             if (transaction != null){

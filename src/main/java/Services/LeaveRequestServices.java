@@ -1,5 +1,6 @@
 package Services;
 
+import Entity.Employee;
 import Entity.LeaveRequest;
 import Repository.EmployeeRepository;
 import Repository.LeaveRequestRepository;
@@ -7,16 +8,21 @@ import Util.Helper;
 import Util.Printer;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class LeaveRequestServices {
     private HashMap<Long, LeaveRequest> attendances;
     private LeaveRequestRepository leaveRequestRepository;
     private EmployeeRepository employeeRepository;
 
+    public LeaveRequestServices(HashMap<Long, LeaveRequest> attendances) {
+        this.attendances = attendances;
+    }
+
     public void add(){
         System.out.println("Add nessesary att information : ");
         LeaveRequest leaveRequest = new LeaveRequest();
-        Printer.printEmployees(employeeRepository.findAll());
+        Printer.printEmployees((List<Employee>) employeeRepository.findAll());
         long id = Helper.getLongFromUser("Employee ID");
         if (employeeRepository.find(id) == null){
             System.out.println("Employee not found");

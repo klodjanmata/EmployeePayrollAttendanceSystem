@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PayrollRepository {
@@ -49,13 +50,13 @@ public class PayrollRepository {
         }
         return payroll ;
     }
-    public List<Payroll> findAll() {
+    public HashMap<Long,Payroll> findAll() {
         Transaction transaction = null;
-        List<Payroll> payrolls = null;
+        HashMap<Long, Payroll> payrolls = null;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            payrolls = session.createQuery("from Payroll", Payroll.class).list();
+            payrolls = (HashMap<Long, Payroll>) session.createQuery("from Payroll", Payroll.class).list();
             transaction.commit();
             return payrolls;
         }catch (Exception e){

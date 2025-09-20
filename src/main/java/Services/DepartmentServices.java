@@ -9,13 +9,16 @@ import Util.Helper;
 
 import java.util.HashMap;
 
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Getter
 @Setter
 public class DepartmentServices {
     private HashMap<Long, Department> departmentsMap;
 
+    public DepartmentServices(HashMap<Long, Department> departmentsMap) {
+        this.departmentsMap = departmentsMap;
+    }
 
     public void add() {
         System.out.println("Add the necessary department information");

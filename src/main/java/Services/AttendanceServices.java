@@ -1,6 +1,7 @@
 package Services;
 
 import Entity.Attendance;
+import Entity.Employee;
 import Repository.AttendanceRepository;
 import Repository.EmployeeRepository;
 import Util.Helper;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashMap;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,10 +23,15 @@ public class AttendanceServices {
     private AttendanceRepository attendanceRepository;
     private EmployeeRepository employeeRepository;
 
+
+    public AttendanceServices(HashMap<Long, Attendance> attendances) {
+        this.attendances = attendances;
+    }
+
     public void add(){
         System.out.println("Add nessesary att information : ");
         Attendance attendance = new Attendance();
-        Printer.printEmployees(employeeRepository.findAll());
+        Printer.printEmployees((List<Employee>) employeeRepository.findAll());
         long id = Helper.getLongFromUser("Employee ID");
         if (employeeRepository.find(id) == null){
             System.out.println("Employee not found");

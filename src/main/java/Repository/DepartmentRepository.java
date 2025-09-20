@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DepartmentRepository {
@@ -50,12 +51,12 @@ public class DepartmentRepository {
         }
         return department;
     }
-    public List<Department> findAll(){
+    public HashMap<Long,Department> findAll(){
         Transaction transaction = null;
-        List<Department> departments = null;
+        HashMap<Long, Department> departments = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            departments = session.createQuery("from Department", Department.class).list();
+            departments = (HashMap<Long, Department>) session.createQuery("from Department", Department.class).list();
             transaction.commit();
             return departments;
         } catch(Exception e){

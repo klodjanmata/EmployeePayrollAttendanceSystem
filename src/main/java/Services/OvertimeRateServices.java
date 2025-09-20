@@ -7,14 +7,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.HashMap;
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Getter
 @Setter
 public class OvertimeRateServices {
         private HashMap<Long, OvertimeRate> overtimesMap;
 
-        public void add(){
+    public OvertimeRateServices(HashMap<Long, OvertimeRate> overtimesMap) {
+        this.overtimesMap = overtimesMap;
+    }
+
+    public void add(){
             System.out.println("Add the necessary overtime rate information");
             OvertimeRate overtimeRate = new OvertimeRate();
             overtimeRate.setDescription(Helper.getStringFromUser("Add the description"));

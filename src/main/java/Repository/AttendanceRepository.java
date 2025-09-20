@@ -6,7 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+
 
 public class AttendanceRepository {
 
@@ -48,13 +49,13 @@ public class AttendanceRepository {
         }
         return attendance;
     }
-    public List<Attendance> findAll(){
+    public HashMap<Long, Attendance> findAll(){
         Transaction transaction = null;
-        List<Attendance> attendances = null;
+        HashMap<Long, Attendance> attendances = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            attendances = session.createQuery("from Attendance", Attendance.class).list();
+            attendances = (HashMap<Long, Attendance>) session.createQuery("from Attendance", Attendance.class).list();
 
             transaction.commit();
             return attendances;

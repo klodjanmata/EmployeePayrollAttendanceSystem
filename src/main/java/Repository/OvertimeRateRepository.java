@@ -5,6 +5,7 @@ import Util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class OvertimeRateRepository {
@@ -46,12 +47,12 @@ public class OvertimeRateRepository {
         }
         return overtimeRate;
     }
-    public List <OvertimeRate> findAll(){
+    public HashMap<Long, OvertimeRate> findAll(){
         Transaction transaction = null;
-        List <OvertimeRate> overtimeRates = null;
+        HashMap <Long, OvertimeRate> overtimeRates = null;
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction= session.beginTransaction();
-            overtimeRates = session.createQuery("Overtime Rates", OvertimeRate.class).list();
+            overtimeRates = (HashMap<Long, OvertimeRate>) session.createQuery("Overtime Rates", OvertimeRate.class).list();
             transaction.commit();
         } catch (Exception e) {
             if(transaction != null){

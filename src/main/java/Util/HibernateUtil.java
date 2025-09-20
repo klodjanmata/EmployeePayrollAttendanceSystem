@@ -18,6 +18,10 @@ public class HibernateUtil {
         }
         return null;
     }
+   // public static SessionFactory openSessionFactory() {
+     //   return sessionFactory;
+   // }
+
 
     public static void shutdown() {
         sessionFactory.close();
