@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.List;
 
 public class AttendanceRepository {
 
@@ -49,13 +49,13 @@ public class AttendanceRepository {
         }
         return attendance;
     }
-    public HashMap<Long, Attendance> findAll(){
+    public static HashMap<Long, Attendance> findAll(){
         Transaction transaction = null;
         HashMap<Long, Attendance> attendances = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            attendances = (HashMap<Long, Attendance>) session.createQuery("from Attendance", Attendance.class).list();
+            attendances = (HashMap<Long, Attendance>) session.createQuery("from Attendance", Attendance.class);
 
             transaction.commit();
             return attendances;
@@ -63,5 +63,13 @@ public class AttendanceRepository {
             e.printStackTrace();
         }
         return attendances;
+    }
+    public HashMap<Long, Attendance> findAllHibernate(){
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            return (HashMap<Long, Attendance>) session.createQuery("FROM Client");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

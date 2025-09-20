@@ -47,12 +47,12 @@ public class OvertimeRateRepository {
         }
         return overtimeRate;
     }
-    public HashMap<Long, OvertimeRate> findAll(){
+    public static HashMap<Long, OvertimeRate> findAll(){
         Transaction transaction = null;
         HashMap <Long, OvertimeRate> overtimeRates = null;
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction= session.beginTransaction();
-            overtimeRates = (HashMap<Long, OvertimeRate>) session.createQuery("Overtime Rates", OvertimeRate.class).list();
+            overtimeRates = (HashMap<Long, OvertimeRate>) session.createQuery("Overtime Rates", OvertimeRate.class);
             transaction.commit();
         } catch (Exception e) {
             if(transaction != null){
@@ -61,5 +61,13 @@ public class OvertimeRateRepository {
             e.printStackTrace();
         }
         return overtimeRates;
+    }
+    public HashMap<Long, OvertimeRate> findAllHibernate(){
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            return (HashMap<Long, OvertimeRate>) session.createQuery("FROM Client");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

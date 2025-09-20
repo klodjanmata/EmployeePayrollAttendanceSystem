@@ -23,7 +23,6 @@ public class AttendanceServices {
     private AttendanceRepository attendanceRepository;
     private EmployeeRepository employeeRepository;
 
-
     public AttendanceServices(HashMap<Long, Attendance> attendances) {
         this.attendances = attendances;
     }

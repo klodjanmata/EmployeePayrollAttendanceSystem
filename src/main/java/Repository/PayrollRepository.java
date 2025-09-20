@@ -50,18 +50,26 @@ public class PayrollRepository {
         }
         return payroll ;
     }
-    public HashMap<Long,Payroll> findAll() {
+    public HashMap<Long, Payroll> findAll() {
         Transaction transaction = null;
         HashMap<Long, Payroll> payrolls = null;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            payrolls = (HashMap<Long, Payroll>) session.createQuery("from Payroll", Payroll.class).list();
+            payrolls = (HashMap<Long, Payroll>) session.createQuery("from Payroll", Payroll.class);
             transaction.commit();
             return payrolls;
         }catch (Exception e){
             e.printStackTrace();
         }
         return payrolls;
+    }
+    public HashMap<Long, Payroll> findAllHibernate(){
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            return (HashMap<Long, Payroll>) session.createQuery("FROM Client");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

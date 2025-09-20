@@ -54,8 +54,8 @@ public class LeaveRequestRepository {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
-            // HQL query to fetch all Actor records
-            leaveRequests = (HashMap<Long, LeaveRequest>) session.createQuery("from LeaveRequest ", LeaveRequest.class).list();
+            // HQL query to fetch all leave requestat records
+            leaveRequests = (HashMap<Long, LeaveRequest>) session.createQuery("Leave Request", LeaveRequest.class);
 
             transaction.commit();
         } catch (Exception e) {
@@ -66,6 +66,14 @@ public class LeaveRequestRepository {
         }
 
         return leaveRequests;
+    }
+    public HashMap<Long, LeaveRequest> findAllHibernate(){
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            return (HashMap<Long, LeaveRequest>) session.createQuery("FROM Client");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
