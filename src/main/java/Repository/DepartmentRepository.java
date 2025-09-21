@@ -5,6 +5,7 @@ import Util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,7 +17,6 @@ public class DepartmentRepository {
             session.persist(department);
             transaction.commit();
             return department;
-
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -52,23 +52,21 @@ public class DepartmentRepository {
     }
     public HashMap<Long, Department> findAll(){
         Transaction transaction = null;
-        HashMap<Long, Department> departments = null;
+        List<Department> departments = null;
+        HashMap<Long, Department> departmentsMap = new HashMap<>();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            departments = (HashMap<Long, Department>) session.createQuery("from Department", Department.class);
+            departments = session.createQuery("From Department", Department.class).list();
             transaction.commit();
-            return departments;
+            for(Department d : departments){
+                departmentsMap.put(d.getId(), d);
+            }
         } catch(Exception e){
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
-        return departments;
-    }
-    public HashMap<Long, Department> findAllHibernate(){
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            return (HashMap<Long, Department>) session.createQuery("FROM Department");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return departmentsMap;
     }
 }

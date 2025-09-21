@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +16,7 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
 
     @Column(name = "name")
     private String name;
@@ -49,7 +47,7 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee {"+
-                "id = "+id+
+                "id = "+Id+
                 ", name = "+ name + '\''+
                 ", email = "+ email + '\''+
                 ", hire date = "+ hireDate + '\''+

@@ -13,10 +13,12 @@ import java.util.Date;
 @Entity
 @Table(name = "attendance")
 public class Attendance {
+    public boolean getStatus(){
+        return status;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @OneToOne
     private Employee employeeId;
     @Column(name = "date")

@@ -43,7 +43,7 @@ public class Printer {
                     attendance.getId()
                             + "\t" + attendance.getEmployeeId()
                             + "\t" + attendance.getDate()
-                            + "\t" + attendance.isStatus()
+                            + "\t" + attendance.getStatus()
                             + "\t" + attendance.getHoursWorked());
         }
     }

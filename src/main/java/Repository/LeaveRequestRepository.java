@@ -5,6 +5,7 @@ import Util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,30 +51,22 @@ public class LeaveRequestRepository {
     }
     public HashMap<Long, LeaveRequest> findAll() {
         Transaction transaction = null;
-        HashMap<Long, LeaveRequest> leaveRequests = null;
+        List<LeaveRequest> leaveRequests = null;
+        HashMap<Long, LeaveRequest> leaveRequestsMap = new HashMap<>();
+
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-
-            // HQL query to fetch all leave requestat records
-            leaveRequests = (HashMap<Long, LeaveRequest>) session.createQuery("Leave Request", LeaveRequest.class);
-
+            leaveRequests = session.createQuery("From LeaveRequest", LeaveRequest.class).list();
             transaction.commit();
+            for(LeaveRequest l : leaveRequests){
+                leaveRequestsMap.put(l.getId(), l);
+            }
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             e.printStackTrace();
         }
-
-        return leaveRequests;
+        return leaveRequestsMap;
     }
-    public HashMap<Long, LeaveRequest> findAllHibernate(){
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            return (HashMap<Long, LeaveRequest>) session.createQuery("FROM LeaveRequest");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
 }

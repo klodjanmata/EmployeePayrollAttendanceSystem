@@ -12,6 +12,12 @@ public class HibernateUtil {
         try{
             return new Configuration()
                     .configure("hibernate.cfg.xml")
+                    .addAnnotatedClass(Entity.Attendance.class)
+                    .addAnnotatedClass(Entity.Department.class)
+                    .addAnnotatedClass(Entity.Employee.class)
+                    .addAnnotatedClass(Entity.LeaveRequest.class)
+                    .addAnnotatedClass(Entity.OvertimeRate.class)
+                    .addAnnotatedClass(Entity.Payroll.class)
                     .buildSessionFactory();
         }catch(Exception e){
             e.printStackTrace();

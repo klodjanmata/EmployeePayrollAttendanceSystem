@@ -1,6 +1,7 @@
 package Services;
 
 import Entity.Attendance;
+import Entity.Department;
 import Entity.Employee;
 import Repository.AttendanceRepository;
 import Repository.EmployeeRepository;
@@ -27,20 +28,40 @@ public class AttendanceServices {
         this.attendances = attendances;
     }
 
-    public void add(){
-        System.out.println("Add nessesary att information : ");
+    public void add() {
+        System.out.println("Add nessesary attendance information : ");
         Attendance attendance = new Attendance();
-        Printer.printEmployees((List<Employee>) employeeRepository.findAll());
-        long id = Helper.getLongFromUser("Employee ID");
-        if (employeeRepository.find(id) == null){
-            System.out.println("Employee not found");
-            return;
-        }
-        else {
-            attendance.setEmployeeId(employeeRepository.find(id));
-        }
         attendance.setDate(Helper.getLocalDateFromUser("Date :"));
         attendance.setStatus(Helper.getBooleanFromUser("Status :"));
         attendance.setHoursWorked(Helper.getIntFromUser("Worked Hours :"));
+
+        Printer.printEmployees((List<Employee>) employeeRepository.findAll());
+        Long id = Helper.getLongFromUser("Employee ID");
+        if (employeeRepository.find(id) == null) {
+            System.out.println("Employee not found");
+            return;
+        } else {
+            attendance.setEmployeeId(employeeRepository.find(id));
+        }
+    }
+
+    public void printAll() {
+        HashMap<Long, Attendance> attendancesMap = this.attendances;
+        for (Attendance attendance : attendancesMap.values()) {
+            System.out.println(attendance);
+        }
+    }
+
+    public void checkAttendance(Long employeeId){
+        Attendance attendance = attendances.get(employeeId);
+        if(attendance ==null) {
+            System.out.println("Attendance record not found for the employee with Id" + employeeId);
+            return;
+        }
+            if(attendance.getStatus()){
+            System.out.println("Employee with Id " + employeeId + "is present");
+            }else{
+            System.out.println("Employee with Id" + employeeId + "is absent");
+        }
     }
 }

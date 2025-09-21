@@ -1,6 +1,11 @@
+import Entity.Employee;
+import Entity.Payroll;
 import Repository.*;
 import Services.*;
 import Util.Helper;
+import jakarta.persistence.Id;
+
+import java.util.HashMap;
 
 
 public class Application {
@@ -31,24 +36,23 @@ public class Application {
         departmentServices = new DepartmentServices(departmentRepository.findAll());
         leaveRequestServices = new LeaveRequestServices(leaveRequestRepository.findAll());
         overtimeRateServices = new OvertimeRateServices(overtimeRateRepository.findAll());
-        payrollServices = new PayrollServices(payrollRepository.findAll());
-
-
+        payrollServices = new PayrollServices((HashMap<Long, Payroll>) payrollRepository.findAll());
     }
+
 
     public static void main(String[] args) {
         Application app = new Application();
         while (true) {
             Menu.mainMenu();
-            if(manageAction(getChoice(), app)){
+            if (manageAction(getChoice(), app)) {
                 return;
             }
         }
+
     }
     private static int getChoice() {
         while(true){
             try{
-
                 int choice = Helper.getIntFromUser("Please enter the number of the choice: ");
                 return choice;
             }catch(Exception e){
@@ -64,6 +68,7 @@ public class Application {
                 break;
             case 2:
                 Menu.departmentMenu();
+                manageDepartmentAction(getChoice(), app);
                 break;
             case 0:
                 System.out.println("Shut Down");
@@ -84,11 +89,35 @@ public class Application {
                 break;
                 case 3:
                     app.employeeServices.printAll();
+                    break;
+            case 4:
+                Long employeeId = Helper.getLongFromUser("Enter employee ID");
+                app.attendanceServices.checkAttendance(employeeId);;
+                break;
+            case 5:
+                app.employeeServices.totalSalary();
+                break;
 
 
         }
     }
-
+    private static void manageDepartmentAction(int choice, Application app) {
+        switch (choice) {
+            case 1:
+                app.departmentServices.add();
+                break;
+            case 2:
+                app.departmentServices.delete();
+                break;
+            case 3:
+                app.departmentServices.printAll();
+                break;
+            case 0:
+                System.out.println("Go back");
+            default:
+                System.out.println("Invalid choice!");
+        }
+    }
     public void openMenu(){
 
     }

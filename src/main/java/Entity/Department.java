@@ -9,13 +9,12 @@ import lombok.*;
 @Setter
 @Entity
 @ToString
+
 @Table(name = "department")
-
 public class Department {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
 
     @Column (name = "name")
     private String name;

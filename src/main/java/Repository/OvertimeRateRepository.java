@@ -5,6 +5,7 @@ import Util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class OvertimeRateRepository {
     public OvertimeRate update(OvertimeRate overtimeRate){
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Transaction transaction = session.beginTransaction();
-            session.remove(overtimeRate);
+            session.merge(overtimeRate);
             transaction.commit();
             return overtimeRate;
         } catch (Exception e) {
@@ -49,25 +50,22 @@ public class OvertimeRateRepository {
     }
     public static HashMap<Long, OvertimeRate> findAll(){
         Transaction transaction = null;
-        HashMap <Long, OvertimeRate> overtimeRates = null;
+        List<OvertimeRate> overtimeRates = null;
+        HashMap <Long, OvertimeRate> overtimeRatesMap = new HashMap<>();
+
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction= session.beginTransaction();
-            overtimeRates = (HashMap<Long, OvertimeRate>) session.createQuery("Overtime Rates", OvertimeRate.class);
+            overtimeRates = session.createQuery("From OvertimeRate", OvertimeRate.class).list();
             transaction.commit();
+            for(OvertimeRate o : overtimeRates){
+                overtimeRatesMap.put(o.getId(), o);
+            }
         } catch (Exception e) {
             if(transaction != null){
                 transaction.rollback();
             }
             e.printStackTrace();
         }
-        return overtimeRates;
-    }
-    public HashMap<Long, OvertimeRate> findAllHibernate(){
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            return (HashMap<Long, OvertimeRate>) session.createQuery("FROM OvertimeRate");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return overtimeRatesMap;
     }
 }

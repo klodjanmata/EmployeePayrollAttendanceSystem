@@ -51,25 +51,22 @@ public class AttendanceRepository {
     }
     public static HashMap<Long, Attendance> findAll(){
         Transaction transaction = null;
-        HashMap<Long, Attendance> attendances = null;
+        List<Attendance> attendances = null;
+        HashMap<Long, Attendance> attendanceMap = new HashMap<>();
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            attendances = (HashMap<Long, Attendance>) session.createQuery("from Attendance", Attendance.class);
-
+            attendances =  session.createQuery("From Attendance", Attendance.class).list();
             transaction.commit();
-            return attendances;
+            for(Attendance a : attendances){
+                attendanceMap.put(a.getId(), a);
+            }
         }catch(Exception e){
-            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+                e.printStackTrace();
+            }
+            return attendanceMap;
         }
-        return attendances;
-    }
-    public HashMap<Long, Attendance> findAllHibernate(){
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            return (HashMap<Long, Attendance>) session.createQuery("FROM Attendance");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }
