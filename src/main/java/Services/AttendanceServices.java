@@ -26,16 +26,20 @@ public class AttendanceServices {
 
     public AttendanceServices(HashMap<Long, Attendance> attendances) {
         this.attendances = attendances;
+
     }
 
-    public void add() {
+    public void addAttendance() {
         System.out.println("Add nessesary attendance information : ");
         Attendance attendance = new Attendance();
         attendance.setDate(Helper.getLocalDateFromUser("Date :"));
-        attendance.setStatus(Helper.getBooleanFromUser("Status :"));
-        attendance.setHoursWorked(Helper.getIntFromUser("Worked Hours :"));
-
-        Printer.printEmployees((List<Employee>) employeeRepository.findAll());
+        //attendance.setStatus(Helper.getBooleanFromUser("Status :"));
+        Boolean status = Helper.getBooleanFromUser("Enter Status true or false");
+        if (status == null) {
+            System.out.println("Invalid input");
+            return;
+        }
+        attendance.setStatus(status);
         Long id = Helper.getLongFromUser("Employee ID");
         if (employeeRepository.find(id) == null) {
             System.out.println("Employee not found");
@@ -43,7 +47,13 @@ public class AttendanceServices {
         } else {
             attendance.setEmployeeId(employeeRepository.find(id));
         }
+        attendance.setHoursWorked(Helper.getIntFromUser("Worked Hours :"));
+
+        if (attendanceRepository != null) {
+            attendanceRepository.create(attendance);
+        }
     }
+
 
     public void printAll() {
         HashMap<Long, Attendance> attendancesMap = this.attendances;
@@ -64,4 +74,13 @@ public class AttendanceServices {
             System.out.println("Employee with Id" + employeeId + "is absent");
         }
     }
-}
+}//        Boolean status = Helper.getBooleanFromUser("Enter Status");
+//            if (status == null) {
+//                System.out.println("Invalid input");
+//                return;
+//            } else if (status) {
+//                System.out.println("Employee with ID " + employee.getId() + " is present");
+//                return;
+//            } else {
+//                System.out.println("Employee with ID" + employee.getId() + " is present");
+//            }

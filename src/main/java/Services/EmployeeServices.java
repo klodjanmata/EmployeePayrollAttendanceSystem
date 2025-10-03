@@ -1,13 +1,7 @@
 package Services;
 
-import Entity.Attendance;
-import Entity.Department;
-import Entity.Employee;
-import Entity.OvertimeRate;
-import Repository.AttendanceRepository;
-import Repository.DepartmentRepository;
-import Repository.OvertimeRateRepository;
-import Repository.PayrollRepository;
+import Entity.*;
+import Repository.*;
 import Util.Helper;
 import Util.Printer;
 import lombok.AllArgsConstructor;
@@ -15,8 +9,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 
 @AllArgsConstructor
@@ -40,6 +36,7 @@ public class EmployeeServices {
         employee.setName(Helper.getStringFromUser("Name of the employee"));
         employee.setEmail(Helper.getStringFromUser("Email of the employee"));
         employee.setHireDate(Helper.getLocalDateFromUser("Hire Date"));
+
         Long id = Helper.getLongFromUser("DepartmentID");
         if (departmentRepository.find(id) == null) {
             System.out.println("Department does not exist");
@@ -47,15 +44,24 @@ public class EmployeeServices {
         } else {
             employee.setDepartmentId(departmentRepository.find(id));
         }
-        Printer.printOvertimeRate((List<OvertimeRate>) overtimeRateRepository.findAll());
-        Long idOvertime = Helper.getLongFromUser("Overtime Rate Id");
-        if (overtimeRateRepository.find(idOvertime) == null) {
-            System.out.println("Overtime Rate does not exist");
+        employee.setBaseSalary(Helper.getLongFromUser("Put your Salary"));
+
+
+        Printer.printOvertimeRate((new ArrayList<>(overtimeRateRepository.findAll().values())));
+        Long overtimeRateID = Helper.getLongFromUser("OvertimeRateID");
+        if (overtimeRateRepository.find(id) == null) {
+            System.out.println("Overtime rate does not exist");
             return;
         } else {
-            employee.setOvertimeRateId(overtimeRateRepository.find(idOvertime));
+            employee.setOvertimeRateId(overtimeRateRepository.find(id));
         }
-        employee.setBaseSalary(Helper.getLongFromUser("Put your Salary"));
+
+        EmployeeRepository repository = new EmployeeRepository();
+        employee = repository.create(employee);
+        employeeMap.put(employee.getId(), employee);
+        System.out.println("Employee added sucessfully");
+
+
     }
 
     public void totalSalary(){

@@ -1,4 +1,5 @@
 import Entity.Employee;
+import Entity.OvertimeRate;
 import Entity.Payroll;
 import Repository.*;
 import Services.*;
@@ -70,6 +71,10 @@ public class Application {
                 Menu.departmentMenu();
                 manageDepartmentAction(getChoice(), app);
                 break;
+            case 3:
+                Menu.toolsMenu();
+                manageToolsAction(getChoice(), app);
+                break;
             case 0:
                 System.out.println("Shut Down");
                 return true;
@@ -81,24 +86,37 @@ public class Application {
 
     private static void manageEmployeAction(int choice, Application app){
         switch (choice){
-            case 1:
+                case 1:
                 app.employeeServices.add();
                 break;
-            case 2:
+                case 2:
                 app.employeeServices.delete();
                 break;
                 case 3:
                     app.employeeServices.printAll();
                     break;
-            case 4:
-                Long employeeId = Helper.getLongFromUser("Enter employee ID");
-                app.attendanceServices.checkAttendance(employeeId);;
-                break;
-            case 5:
-                app.employeeServices.totalSalary();
-                break;
+                case 0:
+                System.out.println("Go back");
+                 default:
+                System.out.println("Invalid choice!");
 
-
+        }
+    }
+    private static void manageToolsAction(int choice, Application app){
+        switch(choice){
+            case 1:
+                app.attendanceServices.addAttendance();
+                break;
+            case 2:
+                app.overtimeRateServices.create();
+                break;
+            case 3:
+                app.overtimeRateServices.printAll();
+                break;
+            case 0:
+                System.out.println("Go back");
+            default:
+                System.out.println("Invalid choice!");
         }
     }
     private static void manageDepartmentAction(int choice, Application app) {
@@ -118,10 +136,6 @@ public class Application {
                 System.out.println("Invalid choice!");
         }
     }
-    public void openMenu(){
-
-    }
-
 }
 
 

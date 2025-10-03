@@ -42,10 +42,15 @@ public class Helper {
         return result;
     }
 
-    public static boolean getBooleanFromUser(String message) {
+    public static Boolean getBooleanFromUser(String message) {
         System.out.print(message + ": ");
         Scanner sc = new Scanner(System.in);
-        return sc.nextBoolean();
+        if (sc.hasNextBoolean()) {
+            return sc.nextBoolean();
+        } else {
+            sc.next();
+            return null;
+        }
     }
 
     public static LocalDate getLocalDateFromUser(String message) {
@@ -67,5 +72,11 @@ public class Helper {
         Scanner sc = new Scanner(System.in);
         return sc.nextLong();
     }
-}
+    public static String toUpperCase(String message){
+       return message.toUpperCase();
+
+
+    }
+
+    }
 

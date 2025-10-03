@@ -6,6 +6,7 @@ public class Menu {
         System.out.println("Choose your action ");
         System.out.println("1.Employee Options");
         System.out.println("2.Department Options");
+        System.out.println("3. Tools");
         System.out.println("0. Shut down");
 
     }
@@ -16,12 +17,9 @@ public class Menu {
         System.out.println("1. Add Employee");
         System.out.println("2. Remove Employee");
         System.out.println("3. Print All Employees");
-        System.out.println("4. Check Attendance");
-        System.out.println("5. Check your Payroll ");
-        System.out.println("6. Check your Over Time Ranting ");
-        System.out.println("7. Apply For Leave Request ");
         System.out.println("0. Go back");
     }
+
     public static void departmentMenu(){
         System.out.println("\n");
         System.out.println("************* Welcome to Your DepartmentSystem *************");
@@ -30,5 +28,11 @@ public class Menu {
         System.out.println("2. Remove Department");
         System.out.println("3. Print All Departments");
         System.out.println("0. Go back");
+    }
+    public static void toolsMenu(){
+        System.out.println("1. Put Attendance");
+        System.out.println("2. Add  OverTime Rating");
+        System.out.println("3. Print overtime rates");
+        System.out.println("4. Apply For Leave Request ");
     }
 }

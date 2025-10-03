@@ -14,15 +14,14 @@ public class Printer {
             System.out.println(
                     department.getId() + "\t" +
                             department.getName() + "\t" +
-                            department.getLocation() + "\t"
-            );
+                            department.getLocation() + "\t");
         }
     }
 
     public static void printEmployees(List<Employee> employees) {
         System.out.println("***Full Employee List***");
         System.out.println("ID\tName\tEmail\tHire Date\tBase Salary\tOvertimeRate");
-        for (Employee employee : employees) {
+        for (Employee employee : employees){
             System.out.println(
                     employee.getId()
                             + "\t" + employee.getName()
@@ -69,8 +68,7 @@ public class Printer {
             System.out.println(
                     overtimeRate.getId()
                             + "\t" + overtimeRate.getDescription()
-                            + "\t" + overtimeRate.getRateForHour()
-            );
+                            + "\t" + overtimeRate.getRateForHour());
         }
     }
 }

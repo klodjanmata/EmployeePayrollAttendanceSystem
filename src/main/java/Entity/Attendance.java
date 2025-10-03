@@ -28,5 +28,4 @@ public class Attendance {
     @Column(name = "hours_worked")
     private int hoursWorked;
 
-
 }

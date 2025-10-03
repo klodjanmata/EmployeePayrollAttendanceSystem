@@ -2,7 +2,6 @@ package Repository;
 
 import Entity.Employee;
 import Util.HibernateUtil;
-import dbConnection.DatabaseConnection;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -56,7 +55,7 @@ public class EmployeeRepository {
     }
     public HashMap<Long, Employee> findAll() {
         Transaction transaction = null;
-        List<Employee> employees = null ;
+        List<Employee> employees = null;
         HashMap<Long, Employee> employeesMap = new HashMap<>();
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -76,17 +75,5 @@ public class EmployeeRepository {
     }
     }
 
-//    public void save(Employee employee) {
-//        try (Connection con = DatabaseConnection.dbConnection()) {
-//            PreparedStatement statement = con.prepareStatement("Insert into employee values (?,?,?,?,?,?)");
-//            statement.setLong(1, employee.getId());
-//            statement.setString(2, employee.getName());
-//            statement.setString(3, employee.getEmail());
-//            statement.setDate(4, Date.valueOf(employee.getHireDate()));
-//            statement.setLong(5, employee.getDepartmentId().getId());
-//            statement.setDouble(6, employee.getBaseSalary());
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+
 

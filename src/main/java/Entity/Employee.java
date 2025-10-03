@@ -27,22 +27,14 @@ public class Employee {
     @Column(name = "hireDate")
     private LocalDate hireDate;
 
-    @OneToOne
+    @ManyToOne
     private Department departmentId;
+
+   @ManyToOne
+    private OvertimeRate overtimeRateId;
 
     @Column(name = "baseSalary")
     private long baseSalary;
-
-    @OneToOne
-    private OvertimeRate overtimeRateId;
-
-
-  //  public static String printAllValues() {
-    //    return Arrays.toString(Employee.values());
-   // }
-
-
-
 
     @Override
     public String toString() {
@@ -55,8 +47,5 @@ public class Employee {
                 ", base salary = "+ baseSalary + '}';
 
     }
-
-
-
 
 }

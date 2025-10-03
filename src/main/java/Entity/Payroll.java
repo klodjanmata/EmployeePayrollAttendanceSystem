@@ -27,10 +27,10 @@ public class Payroll {
     @Column(name= "Base salary")
     private float baseSalary;
 
-    @Column(name = "OvertimeHours")
+    @Column(name = "Overtime_Hours")
     private int overtimeHours;
 
-    @Column(name = "Total Salary")
+    @Column(name = "Total_Salary")
     private float totalSalary;
 
 
