@@ -55,13 +55,16 @@ public class EmployeeRepository {
     }
     public HashMap<Long, Employee> findAll() {
         Transaction transaction = null;
+        Session session = null;
         List<Employee> employees = null;
         HashMap<Long, Employee> employeesMap = new HashMap<>();
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             employees = session.createQuery("From Employee", Employee.class).list();
             transaction.commit();
+
             for(Employee e : employees){
                 employeesMap.put(e.getId(), e);
             }
@@ -70,6 +73,10 @@ public class EmployeeRepository {
                 transaction.rollback();
             }
             e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return employeesMap;
     }

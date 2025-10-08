@@ -9,14 +9,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-
-import static Util.Helper.DATE_FORMATTER;
 
 
 @AllArgsConstructor
@@ -27,6 +23,7 @@ public class EmployeeServices {
     private HashMap<Long, Employee> employeeMap;
     private DepartmentRepository departmentRepository = new DepartmentRepository();
     private OvertimeRateRepository overtimeRateRepository = new OvertimeRateRepository();
+
     private PayrollRepository payrollRepository = new PayrollRepository();
 
     public EmployeeServices(HashMap<Long, Employee> employeeMap) {
@@ -38,13 +35,7 @@ public class EmployeeServices {
         Employee employee = new Employee();
         employee.setName(Helper.getStringFromUser("Name of the employee"));
         employee.setEmail(Helper.getStringFromUser("Email of the employee"));
-        employee.setHireDate(Helper.getStringFromUser("Hire Date(dd.MM.yyyy"));
-        try {
-            LocalDate.parse(employee.getHireDate(),DATE_FORMATTER);
-            employee.setHireDate(employee.getHireDate());
-        } catch (DateTimeParseException e) {
-            System.out.println("Invalid date format! Please use dd.MM.yyyy");
-        }
+        employee.setHireDate(Helper.getLocalDateFromUser("Hire Date"));
 
         Long id = Helper.getLongFromUser("DepartmentID");
         if (departmentRepository.find(id) == null) {
@@ -53,16 +44,16 @@ public class EmployeeServices {
         } else {
             employee.setDepartmentId(departmentRepository.find(id));
         }
-        employee.setBaseSalary(Helper.getLongFromUser("Put your base salary"));
+        employee.setBaseSalary(Helper.getFloatFromUser("Put your Salary"));
 
 
         Printer.printOvertimeRate((new ArrayList<>(overtimeRateRepository.findAll().values())));
         Long overtimeRateID = Helper.getLongFromUser("OvertimeRateID");
-        if (overtimeRateRepository.find(overtimeRateID) == null) {
+        if (overtimeRateRepository.find(id) == null) {
             System.out.println("Overtime rate does not exist");
             return;
         } else {
-            employee.setOvertimeRateId(overtimeRateRepository.find(overtimeRateID));
+            employee.setOvertimeRateId(overtimeRateRepository.find(id));
         }
 
         EmployeeRepository repository = new EmployeeRepository();

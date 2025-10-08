@@ -48,7 +48,7 @@ public class OvertimeRateRepository {
         }
         return overtimeRate;
     }
-    public static HashMap<Long, OvertimeRate> findAll(){
+    public HashMap<Long, OvertimeRate> findAll(){
         Transaction transaction = null;
         List<OvertimeRate> overtimeRates = null;
         HashMap <Long, OvertimeRate> overtimeRatesMap = new HashMap<>();

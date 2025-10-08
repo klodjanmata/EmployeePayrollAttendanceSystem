@@ -36,11 +36,11 @@ public class LeaveRequestServices {
         leaveRequest.setEndDate(Helper.getLocalDateFromUser("End Date (dd.MM.yyyy): "));
         leaveRequest.setReason(Helper.getStringFromUser("The reason: "));
 
-        Boolean status = Helper.getBooleanFromUser("Checking (true/false): ");
-        leaveRequest.setStatus(status != null ? status : false);
+            Boolean status = Helper.getBooleanFromUser("Checking (true/false): ");
+            leaveRequest.setStatus(status != null ? status : false);
 
-        leaveRequest = leaveRequestRepository.create(leaveRequest);
-        leaveRequestsMap.put(leaveRequest.getId(), leaveRequest);
+            leaveRequest = leaveRequestRepository.create(leaveRequest);
+            leaveRequestsMap.put(leaveRequest.getId(), leaveRequest);
         if (leaveRequest.isStatus()) {
             System.out.println("Leave request APPROVED for employee with ID: " + leaveRequest.getId());
         } else {
@@ -61,4 +61,3 @@ public class LeaveRequestServices {
         System.out.println("====================================\n");
     }
 }
-

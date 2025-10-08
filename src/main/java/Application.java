@@ -10,11 +10,13 @@ import java.util.HashMap;
 
 
 public class Application {
+
     private EmployeeRepository employeeRepository;
     private DepartmentRepository departmentRepository;
     private LeaveRequestRepository leaveRequestRepository;
     private OvertimeRateRepository overtimeRateRepository;
     private PayrollRepository payrollRepository;
+
 
     private EmployeeServices employeeServices;
     private DepartmentServices departmentServices;
@@ -23,6 +25,7 @@ public class Application {
     private PayrollServices payrollServices;
 
     public Application() {
+
         employeeRepository = new EmployeeRepository();
         departmentRepository = new DepartmentRepository();
         leaveRequestRepository = new LeaveRequestRepository();
@@ -33,7 +36,7 @@ public class Application {
         departmentServices = new DepartmentServices(departmentRepository.findAll());
         leaveRequestServices = new LeaveRequestServices(leaveRequestRepository.findAll());
         overtimeRateServices = new OvertimeRateServices(overtimeRateRepository.findAll());
-        payrollServices = new PayrollServices(payrollRepository.findAll());
+        payrollServices = new PayrollServices((HashMap<Long, Payroll>) payrollRepository.findAll());
     }
 
 
@@ -53,7 +56,7 @@ public class Application {
                 int choice = Helper.getIntFromUser("Please enter the number of the choice: ");
                 return choice;
             }catch(Exception e){
-                System.out.println("Invalid input! TryAgain!");
+                System.out.println("Invalid input!TryAgain!");
             }
         }
     }
@@ -101,16 +104,22 @@ public class Application {
     private static void manageToolsAction(int choice, Application app){
         switch(choice){
             case 1:
-                app.overtimeRateServices.create();
+                app.payrollServices.add();
                 break;
             case 2:
+                app.payrollServices.add();
+                break;
+            case 3:
+                app.overtimeRateServices.create();
+                break;
+            case 4:
                 app.overtimeRateServices.printAll();
                 break;
-            case 3: app.payrollServices.add();
+            case 5:
+                app.leaveRequestServices.add();
                 break;
-            case 4: app.payrollServices.totalSalary();
-                break;
-            case 5: app.payrollServices.printAll();
+            case 6:
+                app.leaveRequestServices.printAll();
                 break;
             case 0:
                 System.out.println("Go back");
