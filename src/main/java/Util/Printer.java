@@ -27,26 +27,11 @@ public class Printer {
                             + "\t" + employee.getName()
                             + "\t" + employee.getEmail()
                             + "\t" + employee.getHireDate()
+                            + "\t" + employee.getDepartmentId().getName()
                             + "\t" + employee.getBaseSalary()
-                            + "\t" + employee.getDepartmentId()
-                            + "\t" + employee.getBaseSalary()
-                            + "\t" + employee.getOvertimeRateId());
+                            + "\t" + employee.getOvertimeRateId().getRateForHour());
         }
     }
-
-    public static void printAttendances(List<Attendance> attendances) {
-        System.out.println("***Full Employee List***");
-        System.out.println("ID\tEmployeeId\tDate\tStatus\tHours Worked");
-        for (Attendance attendance : attendances) {
-            System.out.println(
-                    attendance.getId()
-                            + "\t" + attendance.getEmployeeId()
-                            + "\t" + attendance.getDate()
-                            + "\t" + attendance.getStatus()
-                            + "\t" + attendance.getHoursWorked());
-        }
-    }
-
     public static void printLeaveRequest(List<LeaveRequest> leaveRequests) {
         System.out.println("***Full Employee List***");
         System.out.println("ID\tEmployeeId\tStart Date\tEnd Date\tReason\tStatus");
@@ -69,6 +54,18 @@ public class Printer {
                     overtimeRate.getId()
                             + "\t" + overtimeRate.getDescription()
                             + "\t" + overtimeRate.getRateForHour());
+        }
+    }
+
+    public static void printPayroll(List<Payroll> payrolls) {
+             System.out.println("Payroll");
+             for (Payroll payroll : payrolls){
+            System.out.println("Employee:" + payroll.getEmployeeId().getName()
+                    + ", base salary: " + payroll.getEmployeeId().getBaseSalary()
+                    + ", overtime hours: " + payroll.getOvertimeHours()
+                    + ", overtime rate: " + payroll.getEmployeeId().getOvertimeRateId().getRateForHour()
+                    + ", Total Salary: " + payroll.getTotalSalary());
+
         }
     }
 }

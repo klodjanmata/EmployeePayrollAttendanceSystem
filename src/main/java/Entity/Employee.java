@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,8 +25,8 @@ public class Employee {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "hireDate")
-    private LocalDate hireDate;
+    @Column(name = "hire_date")
+    private String hireDate;
 
     @ManyToOne
     private Department departmentId;
@@ -33,8 +34,8 @@ public class Employee {
    @ManyToOne
     private OvertimeRate overtimeRateId;
 
-    @Column(name = "baseSalary")
-    private long baseSalary;
+    @Column(name = "base_salary")
+    private double baseSalary;
 
     @Override
     public String toString() {
@@ -43,8 +44,9 @@ public class Employee {
                 ", name = "+ name + '\''+
                 ", email = "+ email + '\''+
                 ", hire date = "+ hireDate + '\''+
-                ", department id  = "+ departmentId + '\''+
-                ", base salary = "+ baseSalary + '}';
+                ", department id  = "+ departmentId.getName() + '\''+
+                ", base salary = "+ baseSalary +
+                ", overtime rate = "+ overtimeRateId.getRateForHour() + "}";
 
     }
 

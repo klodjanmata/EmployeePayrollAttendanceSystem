@@ -10,14 +10,12 @@ import java.util.HashMap;
 
 
 public class Application {
-    private AttendanceRepository attendanceRepository;
     private EmployeeRepository employeeRepository;
     private DepartmentRepository departmentRepository;
     private LeaveRequestRepository leaveRequestRepository;
     private OvertimeRateRepository overtimeRateRepository;
     private PayrollRepository payrollRepository;
 
-    private AttendanceServices attendanceServices;
     private EmployeeServices employeeServices;
     private DepartmentServices departmentServices;
     private LeaveRequestServices leaveRequestServices;
@@ -25,19 +23,17 @@ public class Application {
     private PayrollServices payrollServices;
 
     public Application() {
-        attendanceRepository = new AttendanceRepository();
         employeeRepository = new EmployeeRepository();
         departmentRepository = new DepartmentRepository();
         leaveRequestRepository = new LeaveRequestRepository();
         overtimeRateRepository = new OvertimeRateRepository();
         payrollRepository = new PayrollRepository();
 
-        attendanceServices = new AttendanceServices(attendanceRepository.findAll());
         employeeServices = new EmployeeServices(employeeRepository.findAll());
         departmentServices = new DepartmentServices(departmentRepository.findAll());
         leaveRequestServices = new LeaveRequestServices(leaveRequestRepository.findAll());
         overtimeRateServices = new OvertimeRateServices(overtimeRateRepository.findAll());
-        payrollServices = new PayrollServices((HashMap<Long, Payroll>) payrollRepository.findAll());
+        payrollServices = new PayrollServices(payrollRepository.findAll());
     }
 
 
@@ -57,7 +53,7 @@ public class Application {
                 int choice = Helper.getIntFromUser("Please enter the number of the choice: ");
                 return choice;
             }catch(Exception e){
-                System.out.println("Invalid input!TryAgain!");
+                System.out.println("Invalid input! TryAgain!");
             }
         }
     }
@@ -105,13 +101,16 @@ public class Application {
     private static void manageToolsAction(int choice, Application app){
         switch(choice){
             case 1:
-                app.attendanceServices.addAttendance();
-                break;
-            case 2:
                 app.overtimeRateServices.create();
                 break;
-            case 3:
+            case 2:
                 app.overtimeRateServices.printAll();
+                break;
+            case 3: app.payrollServices.add();
+                break;
+            case 4: app.payrollServices.totalSalary();
+                break;
+            case 5: app.payrollServices.printAll();
                 break;
             case 0:
                 System.out.println("Go back");

@@ -20,6 +20,6 @@ public class OvertimeRate {
     private String description;
 
     @Column(name = "rate_for_hour")
-    private float rateForHour;
+    private double rateForHour;
 
 }

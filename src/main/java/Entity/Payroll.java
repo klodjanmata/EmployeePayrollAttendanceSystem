@@ -24,14 +24,22 @@ public class Payroll {
     @Column(name = "Year")
     private int year;
 
-    @Column(name= "Base salary")
-    private float baseSalary;
+    @Column(name= "Base_salary")
+    private double baseSalary;
 
     @Column(name = "Overtime_Hours")
-    private int overtimeHours;
+    private double overtimeHours;
 
     @Column(name = "Total_Salary")
-    private float totalSalary;
+    private double totalSalary;
 
+    @Override
+    public String toString() {
+        return "Total Salary for {" +
+                "id = " + Id +
+                ", name: " + getEmployeeId().getName() +
+                ", department: " + getEmployeeId().getDepartmentId().getName() +
+                ", base salary: " + getEmployeeId().getBaseSalary() + "} is " + getTotalSalary() ;
+    }
 
 }

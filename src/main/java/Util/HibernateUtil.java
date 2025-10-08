@@ -12,7 +12,6 @@ public class HibernateUtil {
         try{
             return new Configuration()
                     .configure("hibernate.cfg.xml")
-                    .addAnnotatedClass(Entity.Attendance.class)
                     .addAnnotatedClass(Entity.Department.class)
                     .addAnnotatedClass(Entity.Employee.class)
                     .addAnnotatedClass(Entity.LeaveRequest.class)
@@ -24,11 +23,6 @@ public class HibernateUtil {
         }
         return null;
     }
-   // public static SessionFactory openSessionFactory() {
-     //   return sessionFactory;
-   // }
-
-
     public static void shutdown() {
         sessionFactory.close();
     }
