@@ -35,6 +35,8 @@ public class Menu {
         System.out.println("3. Add payroll");
         System.out.println("4. Total Salary");
         System.out.println("5. Print The Payrolls");
+        System.out.println("6. Apply for leave request");
+        System.out.println("5. Print the leave requests");
 
 
     }

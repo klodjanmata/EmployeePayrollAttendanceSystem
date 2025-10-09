@@ -28,7 +28,7 @@ public class OvertimeRate {
                 "│ Overtime Rate ID: " + String.format("%-20s", id) + "│\n" +
                 "├─────────────────────────────────────────┤\n" +
                 "│ Description: " + String.format("%-25s", description != null ? description : "N/A") + "│\n" +
-                "│ Rate per Hour: $" + String.format("%-21s", rateForHour != null ? String.format("%.2f", rateForHour) : "N/A") + "│\n" +
+                "│ Rate per Hour: " + String.format("%-21s", rateForHour != null ? String.format("%.2f", rateForHour) : "N/A") + "│\n" +
                 "└─────────────────────────────────────────┘";
     }
 }

@@ -104,21 +104,21 @@ public class Application {
     private static void manageToolsAction(int choice, Application app){
         switch(choice){
             case 1:
-                app.payrollServices.add();
-                break;
-            case 2:
-                app.payrollServices.add();
-                break;
-            case 3:
                 app.overtimeRateServices.create();
                 break;
-            case 4:
+            case 2:
                 app.overtimeRateServices.printAll();
                 break;
-            case 5:
-                app.leaveRequestServices.add();
+            case 3: app.payrollServices.add();
+                break;
+            case 4: app.payrollServices.totalSalary();
+                break;
+            case 5: app.payrollServices.printAll();
                 break;
             case 6:
+                app.leaveRequestServices.add();
+                break;
+            case 7:
                 app.leaveRequestServices.printAll();
                 break;
             case 0:
