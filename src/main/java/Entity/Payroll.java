@@ -15,7 +15,7 @@ public class Payroll {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private Employee employeeId;
     @Column(name = "Month")
     private String month;

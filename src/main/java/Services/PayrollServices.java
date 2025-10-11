@@ -45,6 +45,10 @@ public class PayrollServices {
     }
 
     public double totalSalary(Payroll payroll){
+        double overtimeHours = payroll.getOvertimeHours();
+        if (overtimeHours == 0){
+            return payroll.getBaseSalary();
+        }
         return payroll.getEmployeeId().getBaseSalary() +
                 (payroll.getOvertimeHours() *
                         payroll.getEmployeeId().getOvertimeRateId().getRateForHour());
@@ -59,6 +63,8 @@ public class PayrollServices {
         }
 
         double total = totalSalary(payroll);
+        payroll.setTotalSalary((float) total);
+        payrollRepository.update(payroll);
         System.out.println("Total salary for " + payroll.getEmployeeId().getName() + " is: $" + total);
 
     }
