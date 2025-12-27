@@ -1,10 +1,7 @@
-import Entity.Employee;
-import Entity.OvertimeRate;
 import Entity.Payroll;
 import Repository.*;
 import Services.*;
 import Util.Helper;
-import jakarta.persistence.Id;
 
 import java.util.HashMap;
 
@@ -53,7 +50,7 @@ public class Application {
     private static int getChoice() {
         while(true){
             try{
-                int choice = Helper.getIntFromUser("Please enter the number of the choice: ");
+                int choice = Helper.getIntFromUser("Please enter the number of the choice");
                 return choice;
             }catch(Exception e){
                 System.out.println("Invalid input!TryAgain!");

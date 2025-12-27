@@ -10,11 +10,11 @@ import java.util.Scanner;
 public class Helper {
 
     public static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static String getStringFromUser(String message) {
         System.out.print(message + ": ");
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+        return scanner.nextLine();
     }
 
     public static char getCharFromUser(String message) {
@@ -23,14 +23,16 @@ public class Helper {
 
     public static int getIntFromUser(String message) {
         System.out.print(message + ": ");
-        Scanner sc = new Scanner(System.in);
-        return sc.nextInt();
+        int value = scanner.nextInt();
+        scanner.nextLine(); // consume the newline
+        return value;
     }
 
     public static float getFloatFromUser(String message) {
         System.out.print(message + ": ");
-        Scanner sc = new Scanner(System.in);
-        return sc.nextFloat();
+        float value = scanner.nextFloat();
+        scanner.nextLine(); // consume the newline
+        return value;
     }
 
     public static String convertListToString(List<String> values) {
@@ -44,11 +46,12 @@ public class Helper {
 
     public static Boolean getBooleanFromUser(String message) {
         System.out.print(message + ": ");
-        Scanner sc = new Scanner(System.in);
-        if (sc.hasNextBoolean()) {
-            return sc.nextBoolean();
+        if (scanner.hasNextBoolean()) {
+            boolean value = scanner.nextBoolean();
+            scanner.nextLine(); // consume the newline
+            return value;
         } else {
-            sc.next();
+            scanner.nextLine(); // consume invalid input
             return null;
         }
     }
@@ -56,21 +59,20 @@ public class Helper {
     public static LocalDate getLocalDateFromUser(String message) {
         System.out.println("Expected date format: dd.MM.yyyy");
         System.out.print(message + ": ");
-        Scanner sc = new Scanner(System.in);
         try {
-            return LocalDate.parse(sc.nextLine(), DATE_FORMATTER);
+            return LocalDate.parse(scanner.nextLine(), DATE_FORMATTER);
         } catch (Exception e) {
             return new Date().toInstant()
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate();
         }
-
     }
 
     public static Long getLongFromUser(String message) {
         System.out.println(message + ": ");
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLong();
+        long value = scanner.nextLong();
+        scanner.nextLine(); // consume the newline
+        return value;
     }
     public static String toUpperCase(String message){
        return message.toUpperCase();

@@ -19,12 +19,17 @@ public class HibernateUtil {
                     .addAnnotatedClass(Entity.Payroll.class)
                     .buildSessionFactory();
         }catch(Exception e){
+            System.err.println("Failed to create Hibernate SessionFactory: " + e.getMessage());
             e.printStackTrace();
+            ExceptionInInitializerError error = new ExceptionInInitializerError("Failed to initialize Hibernate SessionFactory");
+            error.initCause(e);
+            throw error;
         }
-        return null;
     }
     public static void shutdown() {
-        sessionFactory.close();
+        if (sessionFactory != null) {
+            sessionFactory.close();
+        }
     }
 
 }

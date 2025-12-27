@@ -1,9 +1,7 @@
 package Services;
 
 import Entity.Department;
-import Entity.Employee;
 import Repository.DepartmentRepository;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,6 +35,9 @@ public class DepartmentServices {
         System.out.println("Delete Department");
         Long departmentId = Helper.getLongFromUser("Enter department id to delete");
         if (departmentsMap.containsKey(departmentId)) {
+            Department department = departmentsMap.get(departmentId);
+            DepartmentRepository repository = new DepartmentRepository();
+            repository.delete(department);
             departmentsMap.remove(departmentId);
             System.out.println("Department with Id: " + departmentId + " is deleted");
         } else {

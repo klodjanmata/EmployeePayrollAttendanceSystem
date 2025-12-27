@@ -11,8 +11,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
 
 
 @AllArgsConstructor
@@ -31,7 +29,7 @@ public class EmployeeServices {
     }
 
     public void add() {
-        System.out.println("Add the nessesary employee information : ");
+        System.out.println("Add the necessary employee information : ");
         Employee employee = new Employee();
         employee.setName(Helper.getStringFromUser("Name of the employee"));
         employee.setEmail(Helper.getStringFromUser("Email of the employee"));
@@ -49,17 +47,17 @@ public class EmployeeServices {
 
         Printer.printOvertimeRate((new ArrayList<>(overtimeRateRepository.findAll().values())));
         Long overtimeRateID = Helper.getLongFromUser("OvertimeRateID");
-        if (overtimeRateRepository.find(id) == null) {
+        if (overtimeRateRepository.find(overtimeRateID) == null) {
             System.out.println("Overtime rate does not exist");
             return;
         } else {
-            employee.setOvertimeRateId(overtimeRateRepository.find(id));
+            employee.setOvertimeRateId(overtimeRateRepository.find(overtimeRateID));
         }
 
         EmployeeRepository repository = new EmployeeRepository();
         employee = repository.create(employee);
         employeeMap.put(employee.getId(), employee);
-        System.out.println("Employee added sucessfully");
+        System.out.println("Employee added successfully");
 
 
     }
@@ -72,6 +70,9 @@ public class EmployeeServices {
              System.out.println("Delete Employee");
              Long employeeId = Helper.getLongFromUser("Enter employee id to delete");
              if (employeeMap.containsKey(employeeId)) {
+                 Employee employee = employeeMap.get(employeeId);
+                 EmployeeRepository repository = new EmployeeRepository();
+                 repository.delete(employee);
                  employeeMap.remove(employeeId);
                  System.out.println("Employee with Id: " + employeeId + " is deleted");
              } else {
